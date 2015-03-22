@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Local &amp; Session Storage Case Study</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <!--[if lt IE 9]>
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+        <![endif]-->
+    </head>
+    <body>
+      <nav class="navbar navbar-inverse navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Local &amp; Session Storage Case Study</a>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Summary</div>
+              <div class="panel-body">
+                <p>This SPA utilizes <code>localStorage</code> and <code>sessionStorage</code> via the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API" title="HTML5 WebStorage API">HTML5 WebStorage API</a>.</p>
+                <h4>localStorage</h4>
+                <p>The idea behind this case study is to be able to add items to localStorage and be able to view them through the table below. You may also be able to remove keys through the form below, as well as completely clear out localStorage.</p>
+                <h4>sessionStorage</h4>
+                <p>Another idea behind this case study is to show off sessionStorage as well, which is per the browsers session. Hence the tab session. Try clearing the sessionStorage via the button below and open this page in a new tab.</p>
+                <p>There is a table and form controls below to allow you to see localStorage in action. Or, the developer console also is an option to see what's going on when you update the form fields by entering <code>localStorage</code> into the console. Naturally, try opening and closing the browser tab and application without clearing your cache to see localStorage shine.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h3>Add Data</h3>
+            <p>Please enter in data you would like to add to <strong>localStorage</strong>.</p>
+            <form action="#" method="get" class="form-inline">
+              <div class="form-group">
+                <label for="fullName">Name (First and Last)</label>
+                <input class="form-control" type="text" id="fullName" name="fullName" placeholder="Please enter in your full name.">
+              </div>
+              <div class="form-group">
+                <label for="email">E-Mail Address</label>
+                <input class="form-control" type="email" id="email" name="email" placeholder="Enter in your e-mail address.">
+              </div>
+              <button class="btn btn-primary" type="submit" id="getData">Process Data</button>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h3>Remove Data</h3>
+            <p>Please enter in a key and remove that key's data in <strong>localStorage</strong>.</p>
+            <form action="#" method="get">
+              <div class="form-group">
+                <label for="key">Please enter a key</label>
+                <input class="form-control" type="text" id="key" name="key" placeholder="Enter a localStorage key to remove (eg. fullName, email, etc.)">
+              </div>
+              <button class="btn btn-warning" type="submit" id="removeKey">Remove Key</button>
+              <button class="btn btn-danger" type="submit" id="clearData">Clear localStorage</button>
+              <button class="btn btn-danger" type="submit" id="clearSessionData">Clear sessionStorage</button>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Full Name</th>
+                    <th>E-Mail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="fullNameDisplay"><em>Awaiting data</em></td>
+                    <td id="emailDisplay"><em>Awaiting data</em></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p>2015 Aaron Brewer. All Rights Reserved.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <div class="modal fade" id="localStorageMessageModal" tabindex="-1" role="dialog" aria-labelledby="localStorageMessageLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="localStorageMessageLabel">No Local Storage Data Found!</h4>
+            </div>
+            <div class="modal-body">
+              <p>You currently don't have any Local Storage data added to this origin! Why don't you add some?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="sessionStorageMessageModal" tabindex="-1" role="dialog" aria-labelledby="sessionStorageMessageLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="sessionStorageMessageLabel">Session Storage data found!</h4>
+            </div>
+            <div class="modal-body">
+              <p>You currenty have this page opened in another tab, or you refreshed the page. Cool huh?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+      <script src="js/main.js"></script>
+    </body>
+</html>
